@@ -1,0 +1,66 @@
+.bar {
+    margin-left: 15px;
+    position: relative;
+    height: 63px;
+    width: 63px;              /* collapsed width */
+    min-width: 63px;
+    background-color: #24273a;
+    border-radius: 63px;
+    padding: 0 10px 0 30px;   /* space for icon */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    transition: width 0.5s ease-out;
+    overflow: hidden;
+}
+
+.bar p {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    font-size: 25px;
+    color: #cad3f5;
+    pointer-events: none;
+}
+
+.bar input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    color: #cad3f5;
+    font-size: 20px;
+    outline: none;
+    padding: 25px;
+    font-family: "JetBrains Mono", monospace;
+    
+    opacity: 0;                 /* start invisible */
+    transition: opacity 0.4s ease-in;  /* fade-in transition */
+}
+
+/* Expand bar on hover, focus, or if input has text */
+.bar:hover,
+.bar:focus-within,
+.bar input:not(:placeholder-shown) {
+    width: 400px;
+    cursor: text;
+}
+
+.bar:hover input,
+.bar:focus-within input,
+.bar input:not(:placeholder-shown) {
+    opacity: 1;                  /* text becomes visible */
+}
+
+.bar:hover p,
+.bar:focus-within p,   
+.bar input:not(:placeholder-shown) + p {
+    animation: rotate 0.6s ease-out;
+}
+
+@keyframes rotate {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(-360deg); }
+}
