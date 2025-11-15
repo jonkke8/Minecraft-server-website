@@ -1,0 +1,38 @@
+name: Update Badge
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update-badge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Count Open Issues
+      id: count_issues
+      run: |
+        open_issues=$(gh issue list --state open --json number | jq length)
+        echo "open_issues=$open_issues" >> $GITHUB_ENV
+
+    - name: Generate Badge JSON
+      run: |
+        mkdir -p badge
+        echo '{
+          "schemaVersion": 1,
+          "label": "open issues",
+          "message": "'"$open_issues"'",
+          "color": "blue"
+        }' > badge/open_issues.json
+
+    - name: Commit Badge JSON
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add badge/open_issues.json
+        git commit -m "Update badge" || echo "No changes to commit"
+        git push
