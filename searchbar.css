@@ -2,11 +2,11 @@
     margin-left: 15px;
     position: relative;
     height: 63px;
-    width: 63px;              /* collapsed width */
+    width: 63px;
     min-width: 63px;
     background-color: #24273a;
     border-radius: 63px;
-    padding: 0 10px 0 30px;   /* space for icon */
+    padding: 0 10px 0 30px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -35,12 +35,10 @@
     outline: none;
     padding: 25px;
     font-family: "JetBrains Mono", monospace;
-    
-    opacity: 0;                 /* start invisible */
-    transition: opacity 0.4s ease-in;  /* fade-in transition */
+    opacity: 0;
+    transition: opacity 0.4s ease-in;
 }
 
-/* Expand bar on hover, focus, or if input has text */
 .bar:hover,
 .bar:focus-within,
 .bar input:not(:placeholder-shown) {
@@ -51,7 +49,7 @@
 .bar:hover input,
 .bar:focus-within input,
 .bar input:not(:placeholder-shown) {
-    opacity: 1;                  /* text becomes visible */
+    opacity: 1;
 }
 
 .bar:hover p,
