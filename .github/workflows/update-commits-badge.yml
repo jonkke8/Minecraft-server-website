@@ -1,0 +1,38 @@
+name: Update Commits Badge
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update-badge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Count total commits
+      id: commits
+      run: |
+        total_commits=$(git rev-list --count HEAD)
+        echo "TOTAL_COMMITS=$total_commits" >> $GITHUB_ENV
+
+    - name: Generate Badge JSON
+      run: |
+        mkdir -p badge
+        echo '{
+          "schemaVersion": 1,
+          "label": "commits",
+          "message": "'"$TOTAL_COMMITS"'",
+          "color": "green"
+        }' > badge/commits.json
+
+    - name: Commit Badge JSON
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add badge/commits.json
+        git commit -m "Update commits badge" || echo "No changes to commit"
+        git push
