@@ -1,0 +1,45 @@
+.body1 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100vh;
+    font-size: 40px;
+    color: #cad3f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 0;
+    overflow: hidden;
+    text-shadow: 0 4px 1px rgba(0, 0, 0, 0.3);
+
+    background-color: rgb(24, 25, 38, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+
+
+}
+
+.text-wrapper {
+    display: inline-block;
+    font-size: 90px;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;  
+    position: absolute;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: typing 0.5s steps(6, end) forwards ,
+               blink-caret .5s step-end infinite alternate;
+    border-right: 0.25ch solid #cad3f5;
+    
+}
+@keyframes typing { from { width: 0 } to { width: 6ch; } }
+@keyframes blink-caret { 50% { border-color: transparent; } }
